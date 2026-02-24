@@ -22,19 +22,4 @@ public class PatientService {
     public List<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
-
-    public Patient updatePatient(Long id, Patient updatedPatient) {
-
-        Patient existingPatient = patientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + id));
-
-        existingPatient.setFirstName(updatedPatient.getFirstName());
-        existingPatient.setLastName(updatedPatient.getLastName());
-        existingPatient.setAge(updatedPatient.getAge());
-        existingPatient.setGender(updatedPatient.getGender());
-        existingPatient.setPhone(updatedPatient.getPhone());
-        existingPatient.setEmail(updatedPatient.getEmail());
-
-        return patientRepository.save(existingPatient);
-    }
 }
