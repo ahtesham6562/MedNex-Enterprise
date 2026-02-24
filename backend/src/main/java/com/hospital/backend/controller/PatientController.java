@@ -50,4 +50,9 @@ public class PatientController {
         patientService.deletePatient(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{id}")
+    public Patient updatePatient(@PathVariable Long id,
+                                 @RequestBody Patient patient) {
+        return patientService.updatePatient(id, patient);
+    }
 }
