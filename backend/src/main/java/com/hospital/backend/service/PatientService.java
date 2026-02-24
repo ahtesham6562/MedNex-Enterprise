@@ -1,8 +1,12 @@
 package com.hospital.backend.service;
 
+import com.hospital.backend.exception.ResourceNotFoundException;
 import com.hospital.backend.model.Patient;
 import com.hospital.backend.repository.PatientRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 
@@ -22,6 +26,9 @@ public class PatientService {
     public List<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
+    public Page<Patient> getAllPatients(Pageable pageable) {
+        return patientRepository.findAll(pageable);
+    }
 
     public Patient updatePatient(Long id, Patient updatedPatient) {
 
@@ -36,5 +43,19 @@ public class PatientService {
         existingPatient.setEmail(updatedPatient.getEmail());
 
         return patientRepository.save(existingPatient);
+    }
+
+    public Patient getPatientById(Long id) {
+
+        return patientRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Patient not found with id " + id)
+                );
+    }
+    public void deletePatient(Long id) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + id));
+
+        patientRepository.delete(patient);
     }
 }
