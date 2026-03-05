@@ -79,6 +79,10 @@ public class PatientService {
         if (updatedPatient.getEmail() != null)
             existing.setEmail(updatedPatient.getEmail());
 
+        // ✅ JSONB medical history update
+        if (updatedPatient.getMedicalHistory() != null)
+            existing.setMedicalHistory(updatedPatient.getMedicalHistory());
+
         return patientRepository.save(existing);
     }
 

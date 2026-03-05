@@ -2,6 +2,8 @@ package com.hospital.backend.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "patients")
@@ -24,11 +26,16 @@ public class Patient {
     @Min(value = 0, message = "Age must be positive")
     private Integer age;
 
-    @Column(name="tenant_id")
+    @Column(name = "tenant_id")
     private String tenantId;
 
     private String gender;
     private String phone;
+
+    // ✅ JSONB field for medical history (HL7/FHIR simulation)
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "medical_history", columnDefinition = "jsonb")
+    private String medicalHistory;
 
     public Patient() {}
 
@@ -44,7 +51,6 @@ public class Patient {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    // ✅ FIXED
     public Integer getAge() { return age; }
     public void setAge(Integer age) { this.age = age; }
 
@@ -56,4 +62,7 @@ public class Patient {
 
     public String getTenantId() { return tenantId; }
     public void setTenantId(String tenantId) { this.tenantId = tenantId; }
+
+    public String getMedicalHistory() { return medicalHistory; }
+    public void setMedicalHistory(String medicalHistory) { this.medicalHistory = medicalHistory; }
 }
