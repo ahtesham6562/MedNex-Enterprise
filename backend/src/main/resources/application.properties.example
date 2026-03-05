@@ -1,0 +1,14 @@
+spring.datasource.url=jdbc:postgresql://localhost:5432/hospital_db
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+spring.jpa.hibernate.multiTenancy=SCHEMA
+spring.jpa.properties.hibernate.multiTenancy=SCHEMA
+
+# JWT Config
+jwt.secret=your_jwt_secret_here_min_32_chars
+jwt.expiration=3600000

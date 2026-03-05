@@ -22,12 +22,15 @@ public class Patient {
     private String email;
 
     @Min(value = 0, message = "Age must be positive")
-    private int age;
+    private Integer age;
+
+    @Column(name="tenant_id")
+    private String tenantId;
 
     private String gender;
     private String phone;
 
-    public Patient() {}   // REQUIRED default constructor
+    public Patient() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -41,12 +44,16 @@ public class Patient {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public int getAge() { return age; }
-    public void setAge(int age) { this.age = age; }
+    // ✅ FIXED
+    public Integer getAge() { return age; }
+    public void setAge(Integer age) { this.age = age; }
 
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
 
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+
+    public String getTenantId() { return tenantId; }
+    public void setTenantId(String tenantId) { this.tenantId = tenantId; }
 }
