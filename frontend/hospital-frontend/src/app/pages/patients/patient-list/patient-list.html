@@ -1,0 +1,70 @@
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">🏥 MedNex</div>
+    <nav>
+      <ul>
+        <li><a routerLink="/dashboard">🏠 Dashboard</a></li>
+        <li><a routerLink="/patients" class="active">🧑‍⚕️ Patients</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="header">
+      <h1>🧑‍⚕️ Patients</h1>
+      @if (isAdminOrDoctor()) {
+        <a routerLink="/patients/add" class="btn-add">+ Add Patient</a>
+      }
+    </div>
+
+    @if (loading) {
+      <p>Loading...</p>
+    }
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Phone</th>
+          @if (isAdmin()) {
+            <th>Actions</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (patient of patients; track patient.id) {
+          <tr>
+            <td>{{ patient.id }}</td>
+            <td>{{ patient.firstName }}</td>
+            <td>{{ patient.lastName }}</td>
+            <td>{{ patient.email }}</td>
+            <td>{{ patient.age }}</td>
+            <td>{{ patient.gender }}</td>
+            <td>{{ patient.phone }}</td>
+            @if (isAdmin()) {
+              <td>
+                <button class="btn-delete" (click)="deletePatient(patient.id)">🗑️ Delete</button>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 0">← Prev</button>
+      <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next →</button>
+    </div>
+
+  </main>
+</div>
