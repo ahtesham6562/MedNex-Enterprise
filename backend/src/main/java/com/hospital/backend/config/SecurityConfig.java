@@ -36,23 +36,16 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers("/api/auth/**").permitAll()
-
+                        .requestMatchers("/test/**", "/api/test/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/patients/**")
                         .hasAnyRole("ADMIN","DOCTOR","NURSE")
-
                         .requestMatchers(HttpMethod.POST, "/api/patients/**")
                         .hasAnyRole("ADMIN","DOCTOR")
-
                         .requestMatchers(HttpMethod.PUT, "/api/patients/**")
                         .hasAnyRole("ADMIN","DOCTOR")
-
                         .requestMatchers(HttpMethod.DELETE, "/api/patients/**")
                         .hasRole("ADMIN")
-
-                        .requestMatchers("/test/**").permitAll()
-
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter,
@@ -64,7 +57,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

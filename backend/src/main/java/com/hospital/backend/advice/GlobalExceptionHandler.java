@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-                List.of("Something went wrong"),
+                List.of(ex.getMessage()),
                 request.getRequestURI()
         );
 
