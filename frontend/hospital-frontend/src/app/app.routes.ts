@@ -17,5 +17,10 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/patients/patients-module').then(m => m.PatientsModule),
     canActivate: [authGuard]
   },
+  {
+    path: 'appointments',
+    loadComponent: () => import('./pages/appointments/appointments').then(m => m.AppointmentsComponent),
+    canActivate: [authGuard]
+  },
   { path: '**', redirectTo: '/login' }
 ];

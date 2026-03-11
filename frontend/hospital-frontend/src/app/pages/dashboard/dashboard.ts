@@ -19,6 +19,7 @@ export class Dashboard implements OnInit {
   menuItems: { label: string, route: string, icon: string, roles: string[] }[] = [
     { label: 'Dashboard', route: '/dashboard', icon: '🏠', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
     { label: 'Patients', route: '/patients', icon: '🧑‍⚕️', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
+    { label: 'Appointments', route: '/appointments', icon: '📅', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
   ];
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -29,7 +30,6 @@ export class Dashboard implements OnInit {
     this.tenant = localStorage.getItem('tenant') || '';
   }
 
-  // ✅ Role-based menu filter
   get filteredMenu() {
     return this.menuItems.filter(item => item.roles.includes(this.role));
   }
