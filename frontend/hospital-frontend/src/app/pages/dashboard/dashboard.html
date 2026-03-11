@@ -1,5 +1,4 @@
 <div class="layout">
-
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo">
@@ -11,7 +10,6 @@
       <span class="role-badge">{{ role }}</span>
       <p class="tenant">{{ tenant }}</p>
     </div>
-
     <nav>
       <ul>
         @for (item of filteredMenu; track item.route) {
@@ -23,22 +21,23 @@
         }
       </ul>
     </nav>
-
     <button class="logout-btn" (click)="logout()">🚪 LOGOUT</button>
   </aside>
-
   <!-- Main Content -->
   <main class="main-content">
     <h1>Welcome, {{ username }}! 👋</h1>
     <p>Role: <strong>{{ role }}</strong> | Tenant: <strong>{{ tenant }}</strong></p>
-
     <div class="cards">
       <div class="card">
         <h3>🧑‍⚕️ Patients</h3>
         <p>Manage patient records</p>
         <a [routerLink]="'/patients'">View Patients →</a>
       </div>
+      <div class="card">
+        <h3>📅 Appointments</h3>
+        <p>Schedule & manage appointments</p>
+        <a [routerLink]="'/appointments'">View Calendar →</a>
+      </div>
     </div>
   </main>
-
 </div>
