@@ -12,9 +12,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<Appointment> findByTenantId(String tenantId);
 
     boolean existsByDoctorNameAndAppointmentDateTimeBetweenAndTenantId(
-        String doctorName,
-        LocalDateTime start,
-        LocalDateTime end,
-        String tenantId
+            String doctorName,
+            LocalDateTime start,
+            LocalDateTime end,
+            String tenantId
     );
+
+    long countByTenantId(String tenantId);
+
+    long countByStatusAndTenantId(String status, String tenantId);
 }
