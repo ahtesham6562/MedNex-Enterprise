@@ -56,6 +56,8 @@ public class SecurityConfig {
                         .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/dashboard/**")
                         .hasAnyRole("ADMIN","DOCTOR","NURSE")
+                        .requestMatchers(HttpMethod.GET, "/api/access-logs/**")
+                        .hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter,
