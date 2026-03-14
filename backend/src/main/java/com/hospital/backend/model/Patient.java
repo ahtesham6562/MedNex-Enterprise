@@ -31,8 +31,10 @@ public class Patient {
 
     private String gender;
     private String phone;
+    private String address;
+    private String bloodGroup;
+    private String dateOfBirth;
 
-    // ✅ JSONB field for medical history (HL7/FHIR simulation)
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "medical_history", columnDefinition = "jsonb")
     private String medicalHistory;
@@ -59,6 +61,15 @@ public class Patient {
 
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+
+    public String getBloodGroup() { return bloodGroup; }
+    public void setBloodGroup(String bloodGroup) { this.bloodGroup = bloodGroup; }
+
+    public String getDateOfBirth() { return dateOfBirth; }
+    public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 
     public String getTenantId() { return tenantId; }
     public void setTenantId(String tenantId) { this.tenantId = tenantId; }
