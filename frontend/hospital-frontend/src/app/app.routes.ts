@@ -22,5 +22,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/appointments/appointments').then(m => m.AppointmentsComponent),
     canActivate: [authGuard]
   },
+  {
+    path: 'access-logs',
+    loadComponent: () => import('./pages/access-logs/access-logs').then(m => m.AccessLogsComponent),
+    canActivate: [authGuard]
+  },
   { path: '**', redirectTo: '/login' }
 ];

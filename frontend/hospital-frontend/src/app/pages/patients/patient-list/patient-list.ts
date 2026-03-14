@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { PatientService } from '../../../core/services/patient';
 import { AuthService } from '../../../core/services/auth';
 
@@ -12,7 +13,6 @@ import { AuthService } from '../../../core/services/auth';
   styleUrl: './patient-list.css'
 })
 export class PatientList implements OnInit {
-
   patients: any[] = [];
   totalPages = 0;
   currentPage = 0;
@@ -21,7 +21,8 @@ export class PatientList implements OnInit {
 
   constructor(
     private patientService: PatientService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -37,9 +38,21 @@ export class PatientList implements OnInit {
         this.totalPages = data.totalPages;
         this.loading = false;
       },
-      error: () => {
-        this.loading = false;
-      }
+      error: () => { this.loading = false; }
+    });
+  }
+
+  exportPdf(id: number) {
+    this.http.get(`/api/patients/${id}/export-pdf`, { responseType: 'blob' }).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `patient-${id}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => console.error('PDF export failed', err)
     });
   }
 
@@ -65,11 +78,6 @@ export class PatientList implements OnInit {
     }
   }
 
-  isAdmin() {
-    return this.role === 'ADMIN';
-  }
-
-  isAdminOrDoctor() {
-    return this.role === 'ADMIN' || this.role === 'DOCTOR';
-  }
+  isAdmin() { return this.role === 'ADMIN'; }
+  isAdminOrDoctor() { return this.role === 'ADMIN' || this.role === 'DOCTOR'; }
 }

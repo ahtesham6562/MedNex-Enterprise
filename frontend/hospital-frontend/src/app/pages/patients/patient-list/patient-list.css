@@ -110,6 +110,21 @@ nav ul li a:hover, nav ul li a.active {
 
 .table tr:hover { background: #eef4ff; }
 
+.btn-pdf {
+  background: #1E6FCC;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 6px;
+  transition: background 0.2s;
+}
+
+.btn-pdf:hover { background: #1558a8; }
+
 .btn-delete {
   background: #E63A2E;
   color: white;
