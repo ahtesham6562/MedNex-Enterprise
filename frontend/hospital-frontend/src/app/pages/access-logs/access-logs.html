@@ -1,0 +1,54 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">🏥 MedNex</div>
+    <nav>
+      <ul>
+        <li><a routerLink="/dashboard">🏠 Dashboard</a></li>
+        <li><a routerLink="/patients">🧑‍⚕️ Patients</a></li>
+        <li><a routerLink="/appointments">📅 Appointments</a></li>
+        <li><a routerLink="/access-logs" class="active">🔒 Access Logs</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <div class="header">
+      <h1>🔒 HIPAA/GDPR Access Logs</h1>
+    </div>
+
+    @if (loading) {
+      <p>Loading...</p>
+    }
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Action</th>
+          <th>Resource</th>
+          <th>Resource ID</th>
+          <th>IP Address</th>
+          <th>Accessed At</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (log of logs; track log.id) {
+          <tr>
+            <td>{{ log.id }}</td>
+            <td><span class="badge-user">{{ log.username }}</span></td>
+            <td><span class="badge-action">{{ log.action }}</span></td>
+            <td>{{ log.resourceType }}</td>
+            <td>{{ log.resourceId }}</td>
+            <td>{{ log.ipAddress }}</td>
+            <td>{{ log.accessedAt | date:'medium' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    @if (logs.length === 0 && !loading) {
+      <div class="empty">No access logs found.</div>
+    }
+  </main>
+</div>

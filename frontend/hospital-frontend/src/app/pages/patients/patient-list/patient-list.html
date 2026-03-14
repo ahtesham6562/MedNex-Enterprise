@@ -1,5 +1,4 @@
 <div class="layout">
-
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo">🏥 MedNex</div>
@@ -7,6 +6,10 @@
       <ul>
         <li><a routerLink="/dashboard">🏠 Dashboard</a></li>
         <li><a routerLink="/patients" class="active">🧑‍⚕️ Patients</a></li>
+        <li><a routerLink="/appointments">📅 Appointments</a></li>
+        @if (isAdmin()) {
+          <li><a routerLink="/access-logs">🔒 Access Logs</a></li>
+        }
       </ul>
     </nav>
   </aside>
@@ -34,9 +37,7 @@
           <th>Age</th>
           <th>Gender</th>
           <th>Phone</th>
-          @if (isAdmin()) {
-            <th>Actions</th>
-          }
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -49,11 +50,12 @@
             <td>{{ patient.age }}</td>
             <td>{{ patient.gender }}</td>
             <td>{{ patient.phone }}</td>
-            @if (isAdmin()) {
-              <td>
+            <td>
+              <button class="btn-pdf" (click)="exportPdf(patient.id)">📄 PDF</button>
+              @if (isAdmin()) {
                 <button class="btn-delete" (click)="deletePatient(patient.id)">🗑️ Delete</button>
-              </td>
-            }
+              }
+            </td>
           </tr>
         }
       </tbody>
@@ -65,6 +67,5 @@
       <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
       <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next →</button>
     </div>
-
   </main>
 </div>
