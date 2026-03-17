@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { PatientService } from '../../../core/services/patient';
@@ -22,12 +22,15 @@ export class PatientList implements OnInit {
   constructor(
     private patientService: PatientService,
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
-    this.role = localStorage.getItem('role') || '';
-    this.loadPatients();
+    if (isPlatformBrowser(this.platformId)) {
+      this.role = localStorage.getItem('role') || '';
+      this.loadPatients();
+    }
   }
 
   loadPatients() {
@@ -43,6 +46,7 @@ export class PatientList implements OnInit {
   }
 
   exportPdf(id: number) {
+    if (!isPlatformBrowser(this.platformId)) return;
     this.http.get(`/api/patients/${id}/export-pdf`, { responseType: 'blob' }).subscribe({
       next: (blob) => {
         const url = window.URL.createObjectURL(blob);

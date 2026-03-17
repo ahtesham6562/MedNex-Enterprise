@@ -14,6 +14,7 @@ export class AccessLogsComponent implements OnInit {
 
   logs: any[] = [];
   loading = false;
+  error = '';
 
   constructor(private http: HttpClient) {}
 
@@ -23,12 +24,21 @@ export class AccessLogsComponent implements OnInit {
 
   loadLogs() {
     this.loading = true;
+    this.error = '';
     this.http.get<any[]>('/api/access-logs').subscribe({
       next: (data) => {
         this.logs = data;
         this.loading = false;
       },
-      error: () => { this.loading = false; }
+      error: (err) => {
+        this.loading = false;
+        this.error = 'Failed to load. Please refresh.';
+        console.error(err);
+      }
     });
+  }
+
+  refresh() {
+    this.loadLogs();
   }
 }

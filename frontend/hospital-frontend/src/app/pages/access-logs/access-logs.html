@@ -14,38 +14,45 @@
   <main class="main-content">
     <div class="header">
       <h1>🔒 HIPAA/GDPR Access Logs</h1>
+      <button class="btn-refresh" (click)="refresh()">🔄 Refresh</button>
     </div>
 
     @if (loading) {
       <p>Loading...</p>
     }
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Username</th>
-          <th>Action</th>
-          <th>Resource</th>
-          <th>Resource ID</th>
-          <th>IP Address</th>
-          <th>Accessed At</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (log of logs; track log.id) {
+    @if (error) {
+      <div class="alert-error">{{ error }}</div>
+    }
+
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
           <tr>
-            <td>{{ log.id }}</td>
-            <td><span class="badge-user">{{ log.username }}</span></td>
-            <td><span class="badge-action">{{ log.action }}</span></td>
-            <td>{{ log.resourceType }}</td>
-            <td>{{ log.resourceId }}</td>
-            <td>{{ log.ipAddress }}</td>
-            <td>{{ log.accessedAt | date:'medium' }}</td>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Action</th>
+            <th>Resource</th>
+            <th>Resource ID</th>
+            <th>IP Address</th>
+            <th>Accessed At</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (log of logs; track log.id) {
+            <tr>
+              <td>{{ log.id }}</td>
+              <td><span class="badge-user">{{ log.username }}</span></td>
+              <td><span class="badge-action">{{ log.action }}</span></td>
+              <td>{{ log.resourceType }}</td>
+              <td>{{ log.resourceId }}</td>
+              <td>{{ log.ipAddress }}</td>
+              <td>{{ log.accessedAt | date:'medium' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
 
     @if (logs.length === 0 && !loading) {
       <div class="empty">No access logs found.</div>
