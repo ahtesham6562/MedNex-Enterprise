@@ -9,6 +9,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .header h2 {
@@ -27,9 +29,7 @@
   font-size: 14px;
 }
 
-.btn-primary:hover {
-  background: #1558a8;
-}
+.btn-primary:hover { background: #1558a8; }
 
 .btn-danger {
   background: #E63A2E;
@@ -107,6 +107,7 @@
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   margin-bottom: 24px;
+  overflow: hidden;
 }
 
 .list-card {
@@ -121,9 +122,14 @@
   margin-bottom: 16px;
 }
 
+.table-wrapper {
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 500px;
 }
 
 th {
@@ -148,6 +154,51 @@ td {
   font-size: 12px;
 }
 
-.badge.cancelled {
-  background: #E63A2E;
+.badge.cancelled { background: #E63A2E; }
+
+/* FullCalendar Responsive */
+.fc {
+  font-size: 14px;
+}
+
+.fc .fc-toolbar {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 16px !important;
+}
+
+.fc .fc-button {
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .appointments-container { padding: 16px; }
+  .form-row { grid-template-columns: 1fr; }
+  .header h2 { font-size: 20px; }
+  .calendar-card { padding: 12px; }
+
+  .fc .fc-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .fc .fc-toolbar-title { font-size: 14px !important; }
+  .fc .fc-col-header-cell-cushion { font-size: 11px; }
+  .fc .fc-timegrid-slot-label { font-size: 11px; }
+  .fc .fc-view-harness { height: 400px !important; }
+}
+
+@media (max-width: 480px) {
+  .header { flex-direction: column; align-items: flex-start; }
+  th, td { padding: 8px 10px; font-size: 12px; }
+  .fc .fc-toolbar-title { font-size: 12px !important; }
+  .fc .fc-button {
+    padding: 3px 6px !important;
+    font-size: 11px !important;
+  }
+  .fc .fc-view-harness { height: 300px !important; }
 }

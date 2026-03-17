@@ -27,39 +27,41 @@
       <p>Loading...</p>
     }
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Phone</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (patient of patients; track patient.id) {
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
           <tr>
-            <td>{{ patient.id }}</td>
-            <td>{{ patient.firstName }}</td>
-            <td>{{ patient.lastName }}</td>
-            <td>{{ patient.email }}</td>
-            <td>{{ patient.age }}</td>
-            <td>{{ patient.gender }}</td>
-            <td>{{ patient.phone }}</td>
-            <td>
-              <button class="btn-pdf" (click)="exportPdf(patient.id)">📄 PDF</button>
-              @if (isAdmin()) {
-                <button class="btn-delete" (click)="deletePatient(patient.id)">🗑️ Delete</button>
-              }
-            </td>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Actions</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (patient of patients; track patient.id) {
+            <tr>
+              <td>{{ patient.id }}</td>
+              <td>{{ patient.firstName }}</td>
+              <td>{{ patient.lastName }}</td>
+              <td>{{ patient.email }}</td>
+              <td>{{ patient.age }}</td>
+              <td>{{ patient.gender }}</td>
+              <td>{{ patient.phone }}</td>
+              <td>
+                <button class="btn-pdf" (click)="exportPdf(patient.id)">📄 PDF</button>
+                @if (isAdmin()) {
+                  <button class="btn-delete" (click)="deletePatient(patient.id)">🗑️ Delete</button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
 
     <!-- Pagination -->
     <div class="pagination">

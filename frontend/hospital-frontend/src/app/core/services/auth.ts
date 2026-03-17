@@ -14,28 +14,41 @@ export class AuthService {
   login(username: string, password: string) {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password }).pipe(
       tap(response => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('role', response.role);
-        localStorage.setItem('tenant', response.tenant);
-        localStorage.setItem('username', response.username);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+          localStorage.setItem('tenant', response.tenant);
+          localStorage.setItem('username', response.username);
+        }
       })
     );
   }
 
   logout() {
-    localStorage.clear();
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+    }
     this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 
   getRole(): string | null {
-    return localStorage.getItem('role');
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('role');
+    }
+    return null;
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    if (typeof window !== 'undefined') {
+      return !!localStorage.getItem('token');
+    }
+    return false;
   }
 }

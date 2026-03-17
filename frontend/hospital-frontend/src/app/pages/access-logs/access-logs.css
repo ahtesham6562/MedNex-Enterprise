@@ -11,6 +11,8 @@
   background: linear-gradient(180deg, #1a1f71 0%, #1E6FCC 60%, #2196f3 100%);
   color: white;
   padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
@@ -51,7 +53,12 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .header h1 {
@@ -60,13 +67,38 @@ nav ul li a:hover, nav ul li a.active {
   font-weight: 800;
 }
 
+.btn-refresh {
+  background: #1E6FCC;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-refresh:hover { background: #1558a8; }
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(30,111,204,0.1);
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(30,111,204,0.1);
+  min-width: 600px;
 }
 
 .table th {
@@ -110,4 +142,19 @@ nav ul li a:hover, nav ul li a.active {
   color: #888;
   padding: 40px;
   font-size: 16px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .layout { flex-direction: column; height: auto; }
+  .sidebar { width: 100%; padding: 16px; }
+  nav ul { display: flex; flex-wrap: wrap; gap: 4px; }
+  nav ul li a { padding: 8px 12px; font-size: 12px; }
+  .main-content { padding: 16px; }
+  .header h1 { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+  .table th, .table td { padding: 10px 12px; font-size: 12px; }
+  .header { flex-direction: column; align-items: flex-start; }
 }

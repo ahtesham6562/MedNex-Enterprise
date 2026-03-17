@@ -23,16 +23,23 @@ export class AppointmentsComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
 
+  isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   calendarOptions: CalendarOptions = {
-    initialView: 'timeGridWeek',
+    initialView: this.isMobile ? 'dayGridMonth' : 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-    headerToolbar: {
+    headerToolbar: this.isMobile ? {
+      left: 'prev,next',
+      center: 'title',
+      right: 'dayGridMonth'
+    } : {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
     events: [],
-    height: 'auto'
+    height: this.isMobile ? 400 : 'auto',
+    aspectRatio: this.isMobile ? 1.2 : 1.8,
   };
 
   constructor(

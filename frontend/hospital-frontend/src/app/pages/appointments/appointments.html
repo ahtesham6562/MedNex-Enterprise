@@ -53,28 +53,30 @@
 
   <div class="list-card">
     <h3>All Appointments</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Doctor</th>
-          <th>Patient</th>
-          <th>Date & Time</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of appointments">
-          <td>Dr. {{ a.doctorName }}</td>
-          <td>{{ a.patientName }}</td>
-          <td>{{ a.appointmentDateTime | date:'medium' }}</td>
-          <td><span class="badge" [class.cancelled]="a.status === 'CANCELLED'">{{ a.status }}</span></td>
-          <td>
-            <button class="btn-danger" (click)="deleteAppointment(a.id!)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Doctor</th>
+            <th>Patient</th>
+            <th>Date & Time</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of appointments">
+            <td>Dr. {{ a.doctorName }}</td>
+            <td>{{ a.patientName }}</td>
+            <td>{{ a.appointmentDateTime | date:'medium' }}</td>
+            <td><span class="badge" [class.cancelled]="a.status === 'CANCELLED'">{{ a.status }}</span></td>
+            <td>
+              <button class="btn-danger" (click)="deleteAppointment(a.id!)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
 </div>
