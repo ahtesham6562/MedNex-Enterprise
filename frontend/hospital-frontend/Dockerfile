@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY src ./src
+COPY public ./public
 COPY angular.json ./
 COPY tsconfig.json ./
 COPY tsconfig.app.json ./
