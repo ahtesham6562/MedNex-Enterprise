@@ -1,4 +1,4 @@
-import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject, NgZone } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -47,6 +47,7 @@ export class AppointmentsComponent implements OnInit {
     private appointmentService: AppointmentService,
     private fb: FormBuilder,
     private router: Router,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.appointmentForm = this.fb.group({
@@ -63,15 +64,17 @@ export class AppointmentsComponent implements OnInit {
   loadAppointments() {
     this.appointmentService.getAll().subscribe({
       next: (data) => {
-        this.appointments = data;
-        this.calendarOptions = {
-          ...this.calendarOptions,
-          events: data.map(a => ({
-            title: `Dr. ${a.doctorName} - ${a.patientName}`,
-            start: a.appointmentDateTime + '+05:30',
-            color: a.status === 'CANCELLED' ? '#E63A2E' : '#1E6FCC'
-          }))
-        };
+        this.ngZone.run(() => {
+          this.appointments = [...data];
+          this.calendarOptions = {
+            ...this.calendarOptions,
+            events: data.map(a => ({
+              title: `Dr. ${a.doctorName} - ${a.patientName}`,
+              start: a.appointmentDateTime + '+05:30',
+              color: a.status === 'CANCELLED' ? '#E63A2E' : '#1E6FCC'
+            }))
+          };
+        });
       },
       error: (err) => console.error(err)
     });
@@ -83,18 +86,24 @@ export class AppointmentsComponent implements OnInit {
     this.successMessage = '';
     this.appointmentService.create(this.appointmentForm.value).subscribe({
       next: () => {
-        this.successMessage = 'Appointment booked successfully!';
-        this.appointmentForm.reset();
-        this.showForm = false;
-        this.loadAppointments();
+        this.ngZone.run(() => {
+          this.successMessage = 'Appointment booked successfully!';
+          this.appointmentForm.reset();
+          this.showForm = false;
+          this.loadAppointments();
+        });
       },
-      error: (err) => { this.errorMessage = err.error || 'Booking failed!'; }
+      error: (err) => {
+        this.ngZone.run(() => {
+          this.errorMessage = err.error || 'Booking failed!';
+        });
+      }
     });
   }
 
   deleteAppointment(id: number) {
     this.appointmentService.delete(id).subscribe({
-      next: () => this.loadAppointments()
+      next: () => this.ngZone.run(() => this.loadAppointments())
     });
   }
 

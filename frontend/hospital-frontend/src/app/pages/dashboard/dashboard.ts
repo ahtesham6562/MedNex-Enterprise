@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -59,7 +59,8 @@ export class Dashboard implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -72,15 +73,23 @@ export class Dashboard implements OnInit {
   loadStats() {
     this.http.get<any>('/api/dashboard/stats').subscribe({
       next: (data) => {
-        this.stats = data;
+        this.stats = { ...data };
         this.chartData = {
-          ...this.chartData,
-          datasets: [{ data: [data.scheduledAppointments, data.cancelledAppointments], backgroundColor: ['#1E6FCC', '#E63A2E'] }]
+          labels: ['Scheduled', 'Cancelled'],
+          datasets: [{
+            data: [data.scheduledAppointments, data.cancelledAppointments],
+            backgroundColor: ['#1E6FCC', '#E63A2E']
+          }]
         };
         this.barData = {
-          ...this.barData,
-          datasets: [{ label: 'Total Count', data: [data.totalPatients, data.totalAppointments], backgroundColor: ['#1E6FCC', '#1E6FCC'] }]
+          labels: ['Patients', 'Appointments'],
+          datasets: [{
+            label: 'Total Count',
+            data: [data.totalPatients, data.totalAppointments],
+            backgroundColor: ['#1E6FCC', '#1E6FCC']
+          }]
         };
+        this.cdr.detectChanges();
       },
       error: (err) => console.error(err)
     });

@@ -1,4 +1,4 @@
-import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject, NgZone } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { AuthService } from '../../../core/services/auth';
   styleUrl: './patient-list.css'
 })
 export class PatientList implements OnInit {
+
   patients: any[] = [];
   totalPages = 0;
   currentPage = 0;
@@ -23,6 +24,7 @@ export class PatientList implements OnInit {
     private patientService: PatientService,
     private authService: AuthService,
     private http: HttpClient,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -37,11 +39,17 @@ export class PatientList implements OnInit {
     this.loading = true;
     this.patientService.getPatients(this.currentPage).subscribe({
       next: (data) => {
-        this.patients = data.content;
-        this.totalPages = data.totalPages;
-        this.loading = false;
+        this.ngZone.run(() => {
+          this.patients = [...data.content];
+          this.totalPages = data.totalPages;
+          this.loading = false;
+        });
       },
-      error: () => { this.loading = false; }
+      error: () => {
+        this.ngZone.run(() => {
+          this.loading = false;
+        });
+      }
     });
   }
 

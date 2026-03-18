@@ -73,7 +73,7 @@ export class PatientForm implements OnInit {
       gender: ['', Validators.required],
       maritalStatus: ['', Validators.required],
       religion: [''],
-      nationality: ['Pakistani', Validators.required],
+      nationality: ['INDIA', Validators.required],
       cnicNumber: ['', [Validators.required, Validators.pattern(/^\d{13}$|^\d{5}-\d{7}-\d{1}$/)]],
 
       // ===== CONTACT INFO =====
@@ -83,7 +83,7 @@ export class PatientForm implements OnInit {
       address: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      country: ['Pakistan', Validators.required],
+      country: ['INDIAN', Validators.required],
       postalCode: ['', Validators.required],
 
       // ===== EMERGENCY CONTACT =====
