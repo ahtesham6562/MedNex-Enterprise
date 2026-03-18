@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS users (
 -- Insert adminA and adminB
 INSERT INTO users (username, password, role, tenant_id)
 VALUES
-    ('adminA', '$2a$10$ZUKr5xCTF0G7Hinn/u0kZOVABTJ.C44R/5g8dr8R8.GvlC2SpWBWq', 'ROLE_ADMIN', 'TENANT_A'),
-    ('adminB', '$2a$10$ZUKr5xCTF0G7Hinn/u0kZOVABTJ.C44R/5g8dr8R8.GvlC2SpWBWq', 'ROLE_ADMIN', 'TENANT_B')
-    ON CONFLICT (username) DO NOTHING;
+    ('adminA', '$2a$10$mIcrptzyAr4X/KOO14Twk.vqDaa25XCatLodChX0Xpc.SP.DXAR.K', 'ADMIN', 'TENANT_A'),
+    ('adminB', '$2a$10$mIcrptzyAr4X/KOO14Twk.vqDaa25XCatLodChX0Xpc.SP.DXAR.K', 'ADMIN', 'TENANT_B')
+    ON CONFLICT (username) DO UPDATE SET
+    password = EXCLUDED.password,
+                                  role = EXCLUDED.role;
