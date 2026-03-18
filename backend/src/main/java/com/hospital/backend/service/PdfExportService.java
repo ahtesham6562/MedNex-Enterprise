@@ -1,5 +1,6 @@
 package com.hospital.backend.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hospital.backend.model.Patient;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
@@ -7,6 +8,7 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -58,7 +60,24 @@ public class PdfExportService {
             Font sectionFont = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD, new BaseColor(30, 111, 204));
             document.add(new Paragraph("Medical History", sectionFont));
             document.add(Chunk.NEWLINE);
-            document.add(new Paragraph(patient.getMedicalHistory(), normalFont));
+
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                Map<String, Object> medHistory = mapper.readValue(patient.getMedicalHistory(), Map.class);
+
+                PdfPTable medTable = new PdfPTable(2);
+                medTable.setWidthPercentage(100);
+
+                for (Map.Entry<String, Object> entry : medHistory.entrySet()) {
+                    String key = entry.getKey();
+                    String value = entry.getValue() != null ? entry.getValue().toString() : "N/A";
+                    if (value.isEmpty() || value.equals("null") || value.equals("0")) value = "N/A";
+                    addTableRow(medTable, key, value, headerFont, normalFont);
+                }
+                document.add(medTable);
+            } catch (Exception e) {
+                document.add(new Paragraph(patient.getMedicalHistory(), normalFont));
+            }
         }
 
         document.add(Chunk.NEWLINE);
