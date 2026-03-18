@@ -19,13 +19,8 @@
       <button class="btn-refresh" (click)="refresh()">🔄 Refresh</button>
     </div>
 
-    @if (loading) {
-      <p>Loading...</p>
-    }
-
-    @if (error) {
-      <div class="alert-error">{{ error }}</div>
-    }
+    @if (loading) { <p>Loading...</p> }
+    @if (error) { <div class="alert-error">{{ error }}</div> }
 
     <div class="table-wrapper">
       <table class="table">

@@ -42,9 +42,7 @@ export class AccessLogsComponent implements OnInit {
     });
   }
 
-  refresh() {
-    this.loadLogs();
-  }
+  refresh() { this.loadLogs(); }
 
   logout() {
     if (isPlatformBrowser(this.platformId)) {
