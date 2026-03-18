@@ -75,7 +75,7 @@ export class PatientList implements OnInit {
   }
 
   deletePatient(id: number) {
-    if (confirm('Are you sure you want to delete this patient?')) {
+    if (confirm('Are you sure?')) {
       this.patientService.deletePatient(id).subscribe({
         next: () => this.loadPatients()
       });

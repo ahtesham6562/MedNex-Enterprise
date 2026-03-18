@@ -1,5 +1,4 @@
 <div class="layout">
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo">🏥 MedNex</div>
     <nav>
@@ -15,7 +14,6 @@
     </nav>
   </aside>
 
-  <!-- Main Content -->
   <main class="main-content">
     <div class="header">
       <h1>🧑‍⚕️ Patients</h1>
@@ -24,9 +22,7 @@
       }
     </div>
 
-    @if (loading) {
-      <p>Loading...</p>
-    }
+    @if (loading) { <p>Loading...</p> }
 
     <div class="table-wrapper">
       <table class="table">
@@ -64,7 +60,6 @@
       </table>
     </div>
 
-    <!-- Pagination -->
     <div class="pagination">
       <button (click)="prevPage()" [disabled]="currentPage === 0">← Prev</button>
       <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>

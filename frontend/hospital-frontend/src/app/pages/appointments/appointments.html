@@ -1,5 +1,4 @@
 <div class="layout">
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo">🏥 MedNex</div>
     <nav>
@@ -14,9 +13,7 @@
     <button class="logout-btn" (click)="logout()">🚪 LOGOUT</button>
   </aside>
 
-  <!-- Main Content -->
   <main class="main-content">
-
     <div class="header">
       <h2>📅 Appointment Calendar</h2>
       <button class="btn-primary" (click)="showForm = !showForm">
@@ -83,14 +80,11 @@
               <td>{{ a.patientName }}</td>
               <td>{{ a.appointmentDateTime | date:'medium' }}</td>
               <td><span class="badge" [class.cancelled]="a.status === 'CANCELLED'">{{ a.status }}</span></td>
-              <td>
-                <button class="btn-danger" (click)="deleteAppointment(a.id!)">Delete</button>
-              </td>
+              <td><button class="btn-danger" (click)="deleteAppointment(a.id!)">Delete</button></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
   </main>
 </div>

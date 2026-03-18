@@ -58,9 +58,7 @@ export class AppointmentsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.loadAppointments();
-  }
+  ngOnInit() { this.loadAppointments(); }
 
   loadAppointments() {
     this.appointmentService.getAll().subscribe({
@@ -83,7 +81,6 @@ export class AppointmentsComponent implements OnInit {
     if (this.appointmentForm.invalid) return;
     this.errorMessage = '';
     this.successMessage = '';
-
     this.appointmentService.create(this.appointmentForm.value).subscribe({
       next: () => {
         this.successMessage = 'Appointment booked successfully!';
@@ -91,9 +88,7 @@ export class AppointmentsComponent implements OnInit {
         this.showForm = false;
         this.loadAppointments();
       },
-      error: (err) => {
-        this.errorMessage = err.error || 'Booking failed!';
-      }
+      error: (err) => { this.errorMessage = err.error || 'Booking failed!'; }
     });
   }
 
@@ -104,9 +99,7 @@ export class AppointmentsComponent implements OnInit {
   }
 
   logout() {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.clear();
-    }
+    if (isPlatformBrowser(this.platformId)) localStorage.clear();
     this.router.navigate(['/login']);
   }
 }

@@ -6,7 +6,6 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* GRADIENT SIDEBAR */
 .sidebar {
   width: 270px;
   background: linear-gradient(180deg, #1a1f71 0%, #1E6FCC 60%, #2196f3 100%);
@@ -40,14 +39,9 @@
   background: rgba(255,255,255,0.12);
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
 }
 
-.username {
-  font-weight: 700;
-  font-size: 16px;
-  margin: 0 0 8px 0;
-}
+.username { font-weight: 700; font-size: 16px; margin: 0 0 8px 0; }
 
 .role-badge {
   background: linear-gradient(135deg, #E63A2E, #ff6b6b);
@@ -59,17 +53,9 @@
   letter-spacing: 1px;
 }
 
-.tenant {
-  font-size: 12px;
-  color: rgba(255,255,255,0.6);
-  margin: 10px 0 0 0;
-}
+.tenant { font-size: 12px; color: rgba(255,255,255,0.6); margin: 10px 0 0 0; }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 8px 0;
-}
+nav ul { list-style: none; padding: 0; margin: 8px 0; }
 
 nav ul li a {
   display: flex;
@@ -111,7 +97,6 @@ nav ul li a:hover {
   box-shadow: 0 6px 20px rgba(230,58,46,0.5);
 }
 
-/* MAIN CONTENT */
 .main-content {
   flex: 1;
   padding: 32px;
@@ -119,20 +104,9 @@ nav ul li a:hover {
   overflow-y: auto;
 }
 
-.main-content h1 {
-  font-size: 28px;
-  color: #1a1f71;
-  margin-bottom: 4px;
-  font-weight: 800;
-}
+.main-content h1 { font-size: 28px; color: #1a1f71; margin-bottom: 4px; font-weight: 800; }
+.main-content > p { color: #666; margin-bottom: 28px; font-size: 14px; }
 
-.main-content > p {
-  color: #666;
-  margin-bottom: 28px;
-  font-size: 14px;
-}
-
-/* STAT CARDS */
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -164,26 +138,14 @@ nav ul li a:hover {
 .stat-card.green::before { background: linear-gradient(90deg, #28a745, #56cc6a); }
 .stat-card.red::before { background: linear-gradient(90deg, #E63A2E, #ff6b6b); }
 
-.stat-card h3 {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.stat-card h3 { font-size: 13px; color: #888; margin-bottom: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
-.stat-number {
-  font-size: 42px;
-  font-weight: 800;
-  line-height: 1;
-}
+.stat-number { font-size: 42px; font-weight: 800; line-height: 1; }
 
 .stat-card.blue .stat-number { color: #1E6FCC; }
 .stat-card.green .stat-number { color: #28a745; }
 .stat-card.red .stat-number { color: #E63A2E; }
 
-/* CHARTS */
 .charts-row {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -198,21 +160,9 @@ nav ul li a:hover {
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
-.chart-card h3 {
-  color: #1a1f71;
-  margin-bottom: 20px;
-  font-size: 16px;
-  font-weight: 700;
-  border-bottom: 2px solid #f0f4ff;
-  padding-bottom: 12px;
-}
+.chart-card h3 { color: #1a1f71; margin-bottom: 20px; font-size: 16px; font-weight: 700; border-bottom: 2px solid #f0f4ff; padding-bottom: 12px; }
 
-/* QUICK LINKS */
-.quick-links {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
+.quick-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
 .card {
   background: white;
@@ -224,20 +174,10 @@ nav ul li a:hover {
 }
 
 .card:hover { transform: translateY(-4px); }
-
 .card h3 { margin: 0 0 8px 0; color: #1a1f71; font-size: 18px; }
 .card p { color: #888; font-size: 14px; margin-bottom: 16px; }
+.card a { color: #E63A2E; text-decoration: none; font-weight: 700; font-size: 14px; }
 
-.card a {
-  color: #E63A2E;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.card a:hover { text-decoration: underline; }
-
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
   .charts-row { grid-template-columns: 1fr; }
@@ -246,20 +186,9 @@ nav ul li a:hover {
 
 @media (max-width: 768px) {
   .layout { flex-direction: column; height: auto; }
-  .sidebar {
-    width: 100%;
-    padding: 16px;
-  }
-  nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  nav ul li a {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  .logout-btn { margin-top: 12px; }
+  .sidebar { width: 100%; padding: 16px; }
+  nav ul { display: flex; flex-wrap: wrap; gap: 4px; }
+  nav ul li a { padding: 8px 12px; font-size: 12px; }
   .main-content { padding: 16px; }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .main-content h1 { font-size: 20px; }
@@ -269,5 +198,4 @@ nav ul li a:hover {
 @media (max-width: 480px) {
   .cards { grid-template-columns: 1fr; }
   .stat-number { font-size: 28px; }
-  .chart-card { padding: 16px; }
 }

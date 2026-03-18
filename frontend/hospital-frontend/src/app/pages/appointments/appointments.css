@@ -6,7 +6,6 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* SIDEBAR */
 .sidebar {
   width: 270px;
   background: linear-gradient(180deg, #1a1f71 0%, #1E6FCC 60%, #2196f3 100%);
@@ -26,11 +25,7 @@
   margin-bottom: 24px;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+nav ul { list-style: none; padding: 0; margin: 0; }
 
 nav ul li a {
   display: flex;
@@ -71,7 +66,6 @@ nav ul li a:hover, nav ul li a.active {
   box-shadow: 0 6px 20px rgba(230,58,46,0.5);
 }
 
-/* MAIN CONTENT */
 .main-content {
   flex: 1;
   padding: 28px;
@@ -88,11 +82,7 @@ nav ul li a:hover, nav ul li a.active {
   gap: 12px;
 }
 
-.header h2 {
-  color: #1a1f71;
-  font-size: 24px;
-  font-weight: 800;
-}
+.header h2 { color: #1a1f71; font-size: 24px; font-weight: 800; }
 
 .btn-primary {
   background: #1E6FCC;
@@ -142,24 +132,11 @@ nav ul li a:hover, nav ul li a.active {
 
 .form-card h3 { color: #1E6FCC; margin-bottom: 16px; }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
+.form-group { display: flex; flex-direction: column; margin-bottom: 16px; }
 
-.form-group label {
-  font-size: 13px;
-  color: #555;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
+.form-group label { font-size: 13px; color: #555; margin-bottom: 6px; font-weight: 600; }
 
 .form-group input,
 .form-group textarea {
@@ -193,33 +170,19 @@ nav ul li a:hover, nav ul li a.active {
 
 table { width: 100%; border-collapse: collapse; min-width: 500px; }
 
-th {
-  background: #f0f4ff;
-  padding: 12px;
-  text-align: left;
-  font-size: 13px;
-  color: #555;
-}
+th { background: #f0f4ff; padding: 12px; text-align: left; font-size: 13px; color: #555; }
 
 td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
 
-.badge {
-  background: #1E6FCC;
-  color: white;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-}
+.badge { background: #1E6FCC; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; }
 
 .badge.cancelled { background: #E63A2E; }
 
-/* FullCalendar */
 .fc { font-size: 14px; }
 .fc .fc-toolbar { flex-wrap: wrap; gap: 8px; }
 .fc .fc-toolbar-title { font-size: 16px !important; }
 .fc .fc-button { padding: 4px 8px !important; font-size: 12px !important; }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .layout { flex-direction: column; height: auto; }
   .sidebar { width: 100%; padding: 16px; }

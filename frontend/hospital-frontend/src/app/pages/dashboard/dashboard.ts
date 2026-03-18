@@ -38,33 +38,22 @@ export class Dashboard implements OnInit {
 
   chartData: ChartData<'doughnut'> = {
     labels: ['Scheduled', 'Cancelled'],
-    datasets: [{
-      data: [0, 0],
-      backgroundColor: ['#1E6FCC', '#E63A2E']
-    }]
+    datasets: [{ data: [0, 0], backgroundColor: ['#1E6FCC', '#E63A2E'] }]
   };
 
   chartOptions: ChartOptions<'doughnut'> = {
     responsive: true,
-    plugins: {
-      legend: { position: 'bottom' }
-    }
+    plugins: { legend: { position: 'bottom' } }
   };
 
   barData: ChartData<'bar'> = {
     labels: ['Patients', 'Appointments'],
-    datasets: [{
-      label: 'Total Count',
-      data: [0, 0],
-      backgroundColor: ['#1E6FCC', '#1E6FCC']
-    }]
+    datasets: [{ label: 'Total Count', data: [0, 0], backgroundColor: ['#1E6FCC', '#1E6FCC'] }]
   };
 
   barOptions: ChartOptions<'bar'> = {
     responsive: true,
-    plugins: {
-      legend: { display: false }
-    }
+    plugins: { legend: { display: false } }
   };
 
   constructor(
@@ -86,18 +75,11 @@ export class Dashboard implements OnInit {
         this.stats = data;
         this.chartData = {
           ...this.chartData,
-          datasets: [{
-            data: [data.scheduledAppointments, data.cancelledAppointments],
-            backgroundColor: ['#1E6FCC', '#E63A2E']
-          }]
+          datasets: [{ data: [data.scheduledAppointments, data.cancelledAppointments], backgroundColor: ['#1E6FCC', '#E63A2E'] }]
         };
         this.barData = {
           ...this.barData,
-          datasets: [{
-            label: 'Total Count',
-            data: [data.totalPatients, data.totalAppointments],
-            backgroundColor: ['#1E6FCC', '#1E6FCC']
-          }]
+          datasets: [{ label: 'Total Count', data: [data.totalPatients, data.totalAppointments], backgroundColor: ['#1E6FCC', '#1E6FCC'] }]
         };
       },
       error: (err) => console.error(err)
@@ -108,7 +90,5 @@ export class Dashboard implements OnInit {
     return this.menuItems.filter(item => item.roles.includes(this.role));
   }
 
-  logout() {
-    this.authService.logout();
-  }
+  logout() { this.authService.logout(); }
 }
