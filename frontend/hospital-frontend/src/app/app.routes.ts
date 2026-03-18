@@ -8,6 +8,11 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/auth/auth-module').then(m => m.AuthModule)
   },
   {
+    path: 'welcome',
+    loadComponent: () => import('./pages/welcome/welcome').then(m => m.WelcomeComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard-module').then(m => m.DashboardModule),
     canActivate: [authGuard]

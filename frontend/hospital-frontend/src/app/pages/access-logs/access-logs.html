@@ -3,12 +3,14 @@
     <div class="logo">🏥 MedNex</div>
     <nav>
       <ul>
-        <li><a routerLink="/dashboard">🏠 Dashboard</a></li>
+        <li><a routerLink="/welcome">🏠 Home</a></li>
+        <li><a routerLink="/dashboard">📊 Dashboard</a></li>
         <li><a routerLink="/patients">🧑‍⚕️ Patients</a></li>
         <li><a routerLink="/appointments">📅 Appointments</a></li>
         <li><a routerLink="/access-logs" class="active">🔒 Access Logs</a></li>
       </ul>
     </nav>
+    <button class="logout-btn" (click)="logout()">🚪 LOGOUT</button>
   </aside>
 
   <main class="main-content">

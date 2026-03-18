@@ -1,0 +1,35 @@
+<div class="welcome-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">🏥 MEDNEX<span>ENTERPRISE</span></div>
+    <div class="user-info">
+      <p class="username">{{ username }}</p>
+      <span class="role-badge">{{ role }}</span>
+      <p class="tenant">{{ tenant }}</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a routerLink="/welcome" class="active">🏠 Home</a></li>
+        <li><a routerLink="/dashboard">📊 Dashboard</a></li>
+        <li><a routerLink="/patients">🧑‍⚕️ Patients</a></li>
+        <li><a routerLink="/appointments">📅 Appointments</a></li>
+        <li><a routerLink="/access-logs">🔒 Access Logs</a></li>
+      </ul>
+    </nav>
+    <button class="logout-btn" (click)="logout()">🚪 LOGOUT</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="welcome-hero">
+      <div class="big-logo">🏥</div>
+      <h1>Welcome to MedNex Enterprise</h1>
+      <p class="tagline">Your Complete Hospital Management Solution</p>
+      <div class="divider"></div>
+      <h2>Hello, <span>{{ username }}</span>! 👋</h2>
+      <p class="sub">You are logged in as <strong>{{ role }}</strong> for <strong>{{ tenant }}</strong></p>
+      <p class="hint">Click the button below to get started.</p>
+      <a routerLink="/dashboard" class="btn-start">Go to Dashboard →</a>
+    </div>
+  </main>
+</div>

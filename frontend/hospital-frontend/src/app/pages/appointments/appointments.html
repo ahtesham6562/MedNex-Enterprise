@@ -1,82 +1,96 @@
-<div class="appointments-container">
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">🏥 MedNex</div>
+    <nav>
+      <ul>
+        <li><a routerLink="/welcome">🏠 Home</a></li>
+        <li><a routerLink="/dashboard">📊 Dashboard</a></li>
+        <li><a routerLink="/patients">🧑‍⚕️ Patients</a></li>
+        <li><a routerLink="/appointments" class="active">📅 Appointments</a></li>
+        <li><a routerLink="/access-logs">🔒 Access Logs</a></li>
+      </ul>
+    </nav>
+    <button class="logout-btn" (click)="logout()">🚪 LOGOUT</button>
+  </aside>
 
-  <div class="header">
-    <h2>Appointment Calendar</h2>
-    <button class="btn-primary" (click)="showForm = !showForm">
-      {{ showForm ? 'Cancel' : '+ Book Appointment' }}
-    </button>
-  </div>
+  <!-- Main Content -->
+  <main class="main-content">
 
-  <div *ngIf="successMessage" class="alert-success">{{ successMessage }}</div>
-  <div *ngIf="errorMessage" class="alert-error">{{ errorMessage }}</div>
-
-  <div *ngIf="showForm" class="form-card">
-    <h3>Book New Appointment</h3>
-    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Doctor Name</label>
-          <input formControlName="doctorName" placeholder="Dr. Ahmed" />
-        </div>
-        <div class="form-group">
-          <label>Patient Name</label>
-          <input formControlName="patientName" placeholder="Ali Khan" />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Patient Email</label>
-          <input formControlName="patientEmail" type="email" placeholder="patient@email.com" />
-        </div>
-        <div class="form-group">
-          <label>Appointment Date & Time</label>
-          <input formControlName="appointmentDateTime" type="datetime-local" />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Notes</label>
-        <textarea formControlName="notes" placeholder="Optional notes..."></textarea>
-      </div>
-
-      <button type="submit" class="btn-primary" [disabled]="appointmentForm.invalid">
-        Book Appointment
+    <div class="header">
+      <h2>📅 Appointment Calendar</h2>
+      <button class="btn-primary" (click)="showForm = !showForm">
+        {{ showForm ? 'Cancel' : '+ Book Appointment' }}
       </button>
-    </form>
-  </div>
-
-  <div class="calendar-card">
-    <full-calendar [options]="calendarOptions"></full-calendar>
-  </div>
-
-  <div class="list-card">
-    <h3>All Appointments</h3>
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Doctor</th>
-            <th>Patient</th>
-            <th>Date & Time</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let a of appointments">
-            <td>Dr. {{ a.doctorName }}</td>
-            <td>{{ a.patientName }}</td>
-            <td>{{ a.appointmentDateTime | date:'medium' }}</td>
-            <td><span class="badge" [class.cancelled]="a.status === 'CANCELLED'">{{ a.status }}</span></td>
-            <td>
-              <button class="btn-danger" (click)="deleteAppointment(a.id!)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </div>
 
+    <div *ngIf="successMessage" class="alert-success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert-error">{{ errorMessage }}</div>
+
+    <div *ngIf="showForm" class="form-card">
+      <h3>Book New Appointment</h3>
+      <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Doctor Name</label>
+            <input formControlName="doctorName" placeholder="Dr. Ahmed" />
+          </div>
+          <div class="form-group">
+            <label>Patient Name</label>
+            <input formControlName="patientName" placeholder="Ali Khan" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Patient Email</label>
+            <input formControlName="patientEmail" type="email" placeholder="patient@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Appointment Date & Time</label>
+            <input formControlName="appointmentDateTime" type="datetime-local" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea formControlName="notes" placeholder="Optional notes..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" [disabled]="appointmentForm.invalid">
+          Book Appointment
+        </button>
+      </form>
+    </div>
+
+    <div class="calendar-card">
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+
+    <div class="list-card">
+      <h3>All Appointments</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Patient</th>
+              <th>Date & Time</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of appointments">
+              <td>Dr. {{ a.doctorName }}</td>
+              <td>{{ a.patientName }}</td>
+              <td>{{ a.appointmentDateTime | date:'medium' }}</td>
+              <td><span class="badge" [class.cancelled]="a.status === 'CANCELLED'">{{ a.status }}</span></td>
+              <td>
+                <button class="btn-danger" (click)="deleteAppointment(a.id!)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
 </div>

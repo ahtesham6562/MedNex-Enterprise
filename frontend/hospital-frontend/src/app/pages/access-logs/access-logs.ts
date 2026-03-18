@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterLink, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -16,7 +16,11 @@ export class AccessLogsComponent implements OnInit {
   loading = false;
   error = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
     this.loadLogs();
@@ -40,5 +44,12 @@ export class AccessLogsComponent implements OnInit {
 
   refresh() {
     this.loadLogs();
+  }
+
+  logout() {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
+    this.router.navigate(['/login']);
   }
 }

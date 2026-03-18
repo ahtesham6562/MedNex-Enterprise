@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -11,7 +12,7 @@ import { AppointmentService, Appointment } from '../../core/services/appointment
 @Component({
   selector: 'app-appointments',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FullCalendarModule],
+  imports: [CommonModule, ReactiveFormsModule, FullCalendarModule, RouterLink],
   templateUrl: './appointments.html',
   styleUrl: './appointments.css'
 })
@@ -44,7 +45,9 @@ export class AppointmentsComponent implements OnInit {
 
   constructor(
     private appointmentService: AppointmentService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.appointmentForm = this.fb.group({
       doctorName: ['', Validators.required],
@@ -98,5 +101,12 @@ export class AppointmentsComponent implements OnInit {
     this.appointmentService.delete(id).subscribe({
       next: () => this.loadAppointments()
     });
+  }
+
+  logout() {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
+    this.router.navigate(['/login']);
   }
 }

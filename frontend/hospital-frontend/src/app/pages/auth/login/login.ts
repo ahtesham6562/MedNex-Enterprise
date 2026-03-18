@@ -12,7 +12,6 @@ import { AuthService } from '../../../core/services/auth';
   styleUrl: './login.css'
 })
 export class LoginComponent {
-
   loginForm: FormGroup;
   errorMessage = '';
   loading = false;
@@ -30,16 +29,13 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-
     this.loading = true;
     this.errorMessage = '';
-
     const { username, password } = this.loginForm.value;
-
     this.authService.login(username, password).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/welcome']);
       },
       error: (err) => {
         this.loading = false;

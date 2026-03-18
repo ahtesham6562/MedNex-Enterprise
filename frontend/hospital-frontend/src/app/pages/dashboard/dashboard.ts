@@ -29,9 +29,11 @@ export class Dashboard implements OnInit {
   };
 
   menuItems: { label: string, route: string, icon: string, roles: string[] }[] = [
-    { label: 'Dashboard', route: '/dashboard', icon: '🏠', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
+    { label: 'Home', route: '/welcome', icon: '🏠', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
+    { label: 'Dashboard', route: '/dashboard', icon: '📊', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
     { label: 'Patients', route: '/patients', icon: '🧑‍⚕️', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
     { label: 'Appointments', route: '/appointments', icon: '📅', roles: ['ADMIN', 'DOCTOR', 'NURSE'] },
+    { label: 'Access Logs', route: '/access-logs', icon: '🔒', roles: ['ADMIN'] },
   ];
 
   chartData: ChartData<'doughnut'> = {
