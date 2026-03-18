@@ -1,6 +1,5 @@
 package com.hospital.backend.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hospital.backend.model.Patient;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
@@ -8,7 +7,6 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -62,17 +60,21 @@ public class PdfExportService {
             document.add(Chunk.NEWLINE);
 
             try {
-                ObjectMapper mapper = new ObjectMapper();
-                Map<String, Object> medHistory = mapper.readValue(patient.getMedicalHistory(), Map.class);
-
                 PdfPTable medTable = new PdfPTable(2);
                 medTable.setWidthPercentage(100);
 
-                for (Map.Entry<String, Object> entry : medHistory.entrySet()) {
-                    String key = entry.getKey();
-                    String value = entry.getValue() != null ? entry.getValue().toString() : "N/A";
-                    if (value.isEmpty() || value.equals("null") || value.equals("0")) value = "N/A";
-                    addTableRow(medTable, key, value, headerFont, normalFont);
+                String json = patient.getMedicalHistory().trim();
+                json = json.replaceAll("^\\{|\\}$", "");
+                String[] pairs = json.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
+                for (String pair : pairs) {
+                    String[] kv = pair.split(":", 2);
+                    if (kv.length == 2) {
+                        String key = kv[0].trim().replaceAll("\"", "");
+                        String value = kv[1].trim().replaceAll("\"", "");
+                        if (value.equals("null") || value.isEmpty()) value = "N/A";
+                        addTableRow(medTable, key, value, headerFont, normalFont);
+                    }
                 }
                 document.add(medTable);
             } catch (Exception e) {
